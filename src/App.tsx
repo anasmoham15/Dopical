@@ -997,7 +997,7 @@ export default function App() {
           <div className="text-center space-y-2">
             <div className="mx-auto w-14 h-14 rounded-2xl overflow-hidden shadow-lg border border-slate-700">
               <img
-                src="/src/assets/images/dopical_logo_1781802501410.jpg"
+                src="/dopical_logo_1781802501410.jpg"
                 alt="Dopical Logo"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -1132,7 +1132,7 @@ export default function App() {
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg overflow-hidden shadow flex items-center justify-center select-none border border-slate-700/15">
               <img
-                src="/src/assets/images/dopical_logo_1781802501410.jpg"
+                src="/dopical_logo_1781802501410.jpg"
                 alt="Dopical Logo"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
