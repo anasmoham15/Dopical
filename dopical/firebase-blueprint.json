@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User login credentials shape for the calendar client",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Unique, lowercase username"
+        },
+        "passwordHash": {
+          "type": "string",
+          "description": "User password details"
+        }
+      },
+      "required": ["username", "passwordHash"]
+    },
+    "UserEvents": {
+      "title": "UserEvents",
+      "description": "Scheduled appointments and events list associated with a user",
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "description": "Custom structured items representing schedules for day blocks"
+        }
+      },
+      "required": ["events"]
+    }
+  },
+  "firestore": {
+    "/users/{username}": {
+      "schema": "User",
+      "description": "User profile records containing credentials"
+    },
+    "/userEvents/{username}": {
+      "schema": "UserEvents",
+      "description": "Full collection list of events tracked on user calendar"
+    }
+  }
+}

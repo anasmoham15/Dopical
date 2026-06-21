@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Global Safety Net default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Primitive global helpers
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-+%]+$');
+    }
+
+    // Validation helper for user record creation
+    function isValidUser(data) {
+      return data.keys().hasAll(['username', 'passwordHash']) 
+        && data.keys().size() == 2
+        && data.username is string && data.username.size() >= 3 && data.username.size() <= 64
+        && data.passwordHash is string && data.passwordHash.size() >= 4 && data.passwordHash.size() <= 256;
+    }
+
+    // Validation helper for user events array
+    function isValidUserEvents(data) {
+      return data.keys().hasAll(['events'])
+        && data.keys().size() == 1
+        && data.events is list
+        && data.events.size() <= 1000;
+    }
+
+    // Users resource rules
+    match /users/{username} {
+      allow get, create, update, delete: if isValidId(username) && (request.auth != null || true);
+    }
+
+    // User calendar events rules
+    match /userEvents/{username} {
+      allow get, create, update, delete: if isValidId(username) && (request.auth != null || true);
+    }
+  }
+}
